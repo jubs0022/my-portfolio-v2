@@ -1,8 +1,8 @@
-import React, { useState, useRef, useEffect } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { useThemeStore } from '../../themeStore' // adjust path
 
 const Header = () => {
-  const { dark, textColor, bgColor, toggleDark } = useThemeStore()
+  const { dark, textColor, toggleDark } = useThemeStore()
 
   const [logoSrc, setLogoSrc] = useState('/site-logo-light.png')
   const [btnLogoSrc, setBtnLogoSrc] = useState('/moon.svg')

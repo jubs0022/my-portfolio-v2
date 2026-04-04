@@ -7,27 +7,31 @@ const Header = () => {
   const webTheme = useThemeStore((state) => state.webTheme);
   const toggleWebTheme = useThemeStore((state) => state.toggleWebTheme);
 
-  // CRITICAL: Must initialize with null for TypeScript to infer the type correctly
+  // Initializing with null is required for TypeScript refs
   const container = useRef<HTMLDivElement>(null);
   const flareRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
   const tl = useRef<gsap.core.Timeline | null>(null);
 
-  // Hook 1: Define the timeline
+  // Set up the animation timeline
   useGSAP(() => {
+    if (!flareRef.current) return;
+
     tl.current = gsap.timeline({ paused: true }).to(flareRef.current, {
       scale: 50,
       duration: 1.5,
       ease: "expo.inOut",
-      onStart: () => gsap.set(flareRef.current, { opacity: 1 }),
+      onStart: () => {
+        if (flareRef.current) gsap.set(flareRef.current, { opacity: 1 });
+      },
     });
   }, { scope: container });
 
-  // Hook 2: Get contextSafe for the click handler
+  // contextSafe allows GSAP to handle cleanup for functions called outside the hook
   const { contextSafe } = useGSAP(() => {}, { scope: container });
 
-  const handleThemeToggle = contextSafe(() => {
-    // Type guards to satisfy Vercel's strict null checks
+  const handleThemeToggle = contextSafe((): void => {
+    // Strict null checks to prevent "Object is possibly null" errors
     if (!buttonRef.current || !flareRef.current || !tl.current) return;
 
     const isCurrentlyLight = webTheme === "light";
@@ -39,7 +43,7 @@ const Header = () => {
 
     if (isCurrentlyLight) {
       gsap.set(flareRef.current, {
-        backgroundColor: "#343434",
+        backgroundColor: "#1a1a1a", // Matches your dark background
         left: centerX,
         top: centerY,
         xPercent: -50,
@@ -51,33 +55,38 @@ const Header = () => {
       tl.current.reverse();
     }
 
-    // Sync theme swap with animation progress
-    gsap.delayedCall(0.3, () => toggleWebTheme(nextTheme));
+    // Sync the store update with the animation flare
+    gsap.delayedCall(0.4, () => toggleWebTheme(nextTheme));
+    
+    // Explicit return to satisfy void type requirements
+    return;
   });
 
   return (
-    <header ref={container} className="">
+    <header ref={container} className="relative">
+      {/* The Animated Flare Circle */}
       <div
         ref={flareRef}
-        className="fixed w-[100px] h-[100px] rounded-full pointer-events-none scale-0 opacity-0 z-[-1]"
+        className="fixed w-25 h-25 rounded-full pointer-events-none scale-0 opacity-0 z-[-1]"
         style={{ transformOrigin: "center center" }}
       />
 
       <div className="w-full flex items-center justify-center absolute top-0 left-0">
-        <div className="w-full max-w-[1366px] flex items-center justify-between px-[4%] py-4">
+        <div className="w-full max-w-341.5 flex items-center justify-between px-[4%] py-4">
           
-          <div className="relative w-[162px] h-auto">
+          {/* Logo with Grid Stacking for Cross-fade */}
+          <div className="grid w-40.5 h-auto">
             <img
               src="/site-logo-light.png"
               alt="Logo Light"
-              className={`absolute inset-0 w-full h-auto transition-opacity duration-[2000ms] ${
+              className={`row-start-1 col-start-1 w-full h-auto transition-opacity duration-2000 ${
                 webTheme === "light" ? "opacity-100" : "opacity-0"
               }`}
             />
             <img
               src="/site-logo-dark.png"
               alt="Logo Dark"
-              className={`w-full h-auto transition-opacity duration-[2000ms] ${
+              className={`row-start-1 col-start-1 w-full h-auto transition-opacity duration-2000 ${
                 webTheme === "dark" ? "opacity-100" : "opacity-0"
               }`}
             />
@@ -101,7 +110,7 @@ const Header = () => {
           >
             <img
               src={`/${webTheme === "light" ? "moon" : "sun"}.svg`}
-              alt="Toggle icon"
+              alt="Toggle Theme"
               className="w-7.5 h-7.5"
             />
           </button>

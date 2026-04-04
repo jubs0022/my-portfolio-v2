@@ -49,13 +49,13 @@ export default function Default_Footer() {
             {/* FACEBOOK */}
             <img
               src="/facebook.svg"
-              className={`row-start-1 col-start-1 h-auto transition-opacity duration-[2000ms] w-8.25 ${
+              className={`row-start-1 col-start-1 h-auto transition-opacity duration-2000 w-8.25 ${
                 webTheme === "light" ? "opacity-100" : "opacity-0"
               }`}
             />
             <img
               src="/facebook.svg"
-              className={`row-start-1 col-start-1 h-auto transition-opacity duration-[2000ms] w-8.25 invert brightness-[0] ${
+              className={`row-start-1 col-start-1 h-auto transition-opacity duration-2000 w-8.25 invert brightness-[0] ${
                 webTheme === "dark" ? "opacity-100" : "opacity-0"
               }`}
             />
@@ -63,13 +63,13 @@ export default function Default_Footer() {
             {/* LINKEDIN */}
             <img
               src="/linkedin.svg"
-              className={`row-start-1 col-start-2 h-auto transition-opacity duration-[2000ms] w-8.25 ${
+              className={`row-start-1 col-start-2 h-auto transition-opacity duration-2000 w-8.25 ${
                 webTheme === "light" ? "opacity-100" : "opacity-0"
               }`}
             />
             <img
               src="/linkedin.svg"
-              className={`row-start-1 col-start-2 h-auto transition-opacity duration-[2000ms] w-8.25 invert brightness-[0] ${
+              className={`row-start-1 col-start-2 h-auto transition-opacity duration-2000 w-8.25 invert brightness-[0] ${
                 webTheme === "dark" ? "opacity-100" : "opacity-0"
               }`}
             />
@@ -77,13 +77,13 @@ export default function Default_Footer() {
             {/* GITHUB - Fixed logic and syntax */}
             <img
               src="/github.svg"
-              className={`row-start-1 col-start-3 h-auto transition-opacity duration-[2000ms] w-8.25 ${
+              className={`row-start-1 col-start-3 h-auto transition-opacity duration-2000 w-8.25 ${
                 webTheme === "light" ? "opacity-100" : "opacity-0"
               }`}
             />
             <img
               src="/github.svg"
-              className={`row-start-1 col-start-3 h-auto transition-opacity duration-[2000ms] w-8.25 invert brightness-[0] ${
+              className={`row-start-1 col-start-3 h-auto transition-opacity duration-2000 w-8.25 invert brightness-[0] ${
                 webTheme === "dark" ? "opacity-100" : "opacity-0"
               }`}
             />

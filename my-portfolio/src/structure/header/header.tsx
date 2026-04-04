@@ -7,26 +7,28 @@ const Header = () => {
   const webTheme = useThemeStore((state) => state.webTheme);
   const toggleWebTheme = useThemeStore((state) => state.toggleWebTheme);
 
-  const container = useRef();
-  const flareRef = useRef();
-  const buttonRef = useRef(); // ✅ Add a ref for the button
-  const tl = useRef();
+  // Define explicit types for your refs
+  const container = useRef<HTMLDivElement>(null);
+  const flareRef = useRef<HTMLDivElement>(null);
+  const buttonRef = useRef<HTMLButtonElement>(null);
+  const tl = useRef<gsap.core.Timeline>();
 
-  useGSAP(
-    () => {
-      tl.current = gsap.timeline({ paused: true }).to(flareRef.current, {
-        scale: 50,
-        duration: 1.5,
-        ease: "expo.inOut",
-        onStart: () => gsap.set(flareRef.current, { opacity: 1 }),
-      });
-    },
-    { scope: container },
-  );
+  // Corrected: pass callback as first argument
+  useGSAP(() => {
+    tl.current = gsap.timeline({ paused: true }).to(flareRef.current, {
+      scale: 50,
+      duration: 1.5,
+      ease: "expo.inOut",
+      onStart: () => gsap.set(flareRef.current, { opacity: 1 }),
+    });
+  }, { scope: container });
 
-  const { contextSafe } = useGSAP({ scope: container });
+  // Corrected: pass empty callback to get contextSafe
+  const { contextSafe } = useGSAP(() => {}, { scope: container });
 
   const handleThemeToggle = contextSafe(() => {
+    if (!buttonRef.current || !flareRef.current || !tl.current) return;
+
     const isCurrentlyLight = webTheme === "light";
     const nextTheme = isCurrentlyLight ? "dark" : "light";
 
@@ -44,33 +46,24 @@ const Header = () => {
       });
 
       tl.current.play();
-
-      // ✅ DELAY THE THEME SWAP
-      // If the animation is 1.2s, 0.4s to 0.6s is usually the "sweet spot"
-      // where the circle is large enough to cover the header text.
       gsap.delayedCall(0.3, () => toggleWebTheme(nextTheme));
     } else {
       tl.current.reverse();
-
-      // ✅ DELAY THE REVERSE SWAP
-      // When shrinking, we wait until it's small enough to "reveal" the light theme.
       gsap.delayedCall(0.3, () => toggleWebTheme(nextTheme));
     }
   });
 
   return (
     <header ref={container} className="">
-      {/* ✅ The Flare: We remove hardcoded top/right. Position is handled by GSAP */}
       <div
         ref={flareRef}
         className="fixed w-[100px] h-[100px] rounded-full pointer-events-none scale-0 opacity-0 z-[-1]"
         style={{ transformOrigin: "center center" }}
       />
 
-      <div className="w-full flex items-center justify-center absolute top-0 left-0 ">
+      <div className="w-full flex items-center justify-center absolute top-0 left-0">
         <div className="w-full max-w-[1366px] flex items-center justify-between px-[4%] py-4">
           <div className="relative w-[162px] h-auto">
-            {/* Light Logo */}
             <img
               src="/site-logo-light.png"
               alt="Logo Light"
@@ -78,8 +71,6 @@ const Header = () => {
                 webTheme === "light" ? "opacity-100" : "opacity-0"
               }`}
             />
-
-            {/* Dark Logo */}
             <img
               src="/site-logo-dark.png"
               alt="Logo Dark"
@@ -90,22 +81,14 @@ const Header = () => {
           </div>
 
           <ul className="flex gap-12">
-            <li>
-              <a href="#">Home</a>
-            </li>
-            <li>
-              <a href="#">About</a>
-            </li>
-            <li>
-              <a href="#">Projects</a>
-            </li>
-            <li>
-              <a href="#">Contact</a>
-            </li>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Projects</a></li>
+            <li><a href="#">Contact</a></li>
           </ul>
 
           <button
-            ref={buttonRef} // ✅ Attach the ref here
+            ref={buttonRef}
             onClick={handleThemeToggle}
             className={`px-2.5 py-2.5 rounded-full z-20 relative transition-colors duration-500 ${
               webTheme === "light" ? "bg-[#343434]" : "bg-[#f8f8f8]"

@@ -7,13 +7,13 @@ const Header = () => {
   const webTheme = useThemeStore((state) => state.webTheme);
   const toggleWebTheme = useThemeStore((state) => state.toggleWebTheme);
 
-  // Define explicit types for your refs
+  // CRITICAL: Must initialize with null for TypeScript to infer the type correctly
   const container = useRef<HTMLDivElement>(null);
   const flareRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
-  const tl = useRef<gsap.core.Timeline>();
+  const tl = useRef<gsap.core.Timeline | null>(null);
 
-  // Corrected: pass callback as first argument
+  // Hook 1: Define the timeline
   useGSAP(() => {
     tl.current = gsap.timeline({ paused: true }).to(flareRef.current, {
       scale: 50,
@@ -23,10 +23,11 @@ const Header = () => {
     });
   }, { scope: container });
 
-  // Corrected: pass empty callback to get contextSafe
+  // Hook 2: Get contextSafe for the click handler
   const { contextSafe } = useGSAP(() => {}, { scope: container });
 
   const handleThemeToggle = contextSafe(() => {
+    // Type guards to satisfy Vercel's strict null checks
     if (!buttonRef.current || !flareRef.current || !tl.current) return;
 
     const isCurrentlyLight = webTheme === "light";
@@ -46,11 +47,12 @@ const Header = () => {
       });
 
       tl.current.play();
-      gsap.delayedCall(0.3, () => toggleWebTheme(nextTheme));
     } else {
       tl.current.reverse();
-      gsap.delayedCall(0.3, () => toggleWebTheme(nextTheme));
     }
+
+    // Sync theme swap with animation progress
+    gsap.delayedCall(0.3, () => toggleWebTheme(nextTheme));
   });
 
   return (
@@ -63,29 +65,32 @@ const Header = () => {
 
       <div className="w-full flex items-center justify-center absolute top-0 left-0">
         <div className="w-full max-w-[1366px] flex items-center justify-between px-[4%] py-4">
+          
           <div className="relative w-[162px] h-auto">
             <img
               src="/site-logo-light.png"
               alt="Logo Light"
-              className={`absolute inset-0 w-full h-auto transition-opacity duration-2000 ${
+              className={`absolute inset-0 w-full h-auto transition-opacity duration-[2000ms] ${
                 webTheme === "light" ? "opacity-100" : "opacity-0"
               }`}
             />
             <img
               src="/site-logo-dark.png"
               alt="Logo Dark"
-              className={`w-full h-auto transition-opacity duration-2000 ${
+              className={`w-full h-auto transition-opacity duration-[2000ms] ${
                 webTheme === "dark" ? "opacity-100" : "opacity-0"
               }`}
             />
           </div>
 
-          <ul className="flex gap-12">
-            <li><a href="#">Home</a></li>
-            <li><a href="#">About</a></li>
-            <li><a href="#">Projects</a></li>
-            <li><a href="#">Contact</a></li>
-          </ul>
+          <nav>
+            <ul className="flex gap-12">
+              <li><a href="#">Home</a></li>
+              <li><a href="#">About</a></li>
+              <li><a href="#">Projects</a></li>
+              <li><a href="#">Contact</a></li>
+            </ul>
+          </nav>
 
           <button
             ref={buttonRef}
@@ -96,7 +101,7 @@ const Header = () => {
           >
             <img
               src={`/${webTheme === "light" ? "moon" : "sun"}.svg`}
-              alt="Toggle"
+              alt="Toggle icon"
               className="w-7.5 h-7.5"
             />
           </button>

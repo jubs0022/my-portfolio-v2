@@ -1,113 +1,95 @@
-import { useState, useRef, useEffect } from 'react'
-import { useThemeStore } from '../../themeStore' // adjust path
+import { useRef } from 'react'
+import { useThemeStore } from '../../themeStore'
+import gsap from 'gsap'
+import { useGSAP } from '@gsap/react'
 
 const Header = () => {
-  const { dark, textColor, toggleDark } = useThemeStore()
+  const webTheme = useThemeStore((state) => state.webTheme);
+  const toggleWebTheme = useThemeStore((state) => state.toggleWebTheme);
+  
+  const container = useRef();
+  const flareRef = useRef();
+  const buttonRef = useRef(); // ✅ Add a ref for the button
+  const tl = useRef();
 
-  const [logoSrc, setLogoSrc] = useState('/site-logo-light.png')
-  const [btnLogoSrc, setBtnLogoSrc] = useState('/moon.svg')
-  const [circlePos, setCirclePos] = useState({ x: 0, y: 0 })
-  const [circleSize, setCircleSize] = useState(0)
+  useGSAP(() => {
+    tl.current = gsap.timeline({ paused: true })
+      .to(flareRef.current, {
+        scale: 50,
+        duration: 1.2,
+        ease: "expo.inOut",
+        onStart: () => gsap.set(flareRef.current, { opacity: 1 })
+      });
+  }, { scope: container });
 
-  const buttonRef = useRef<HTMLButtonElement>(null)
-  const logoRef = useRef<HTMLImageElement>(null)
+  const { contextSafe } = useGSAP({ scope: container });
 
-  // Get button center for circle origin
-  useEffect(() => {
-    if (buttonRef.current) {
-      const rect = buttonRef.current.getBoundingClientRect()
-      setCirclePos({
-        x: rect.left + rect.width / 2,
-        y: rect.top + rect.height / 2,
-      })
+  const handleThemeToggle = contextSafe(() => {
+    const isCurrentlyLight = webTheme === 'light';
+    const nextTheme = isCurrentlyLight ? 'dark' : 'light';
+
+    // ✅ CALCULATE POSITION: Get the button's exact center coordinates
+    const rect = buttonRef.current.getBoundingClientRect();
+    const centerX = rect.left + rect.width / 2;
+    const centerY = rect.top + rect.height / 2;
+
+    if (isCurrentlyLight) {
+      // Set the flare to the button's position before playing
+      gsap.set(flareRef.current, { 
+        backgroundColor: '#1a1a1a',
+        left: centerX,
+        top: centerY,
+        xPercent: -50, // Center the flare div itself
+        yPercent: -50
+      });
+      
+      tl.current.play();
+      gsap.delayedCall(0.6, () => toggleWebTheme(nextTheme));
+    } else {
+      // When reversing, it already knows where to go back to!
+      tl.current.reverse();
+      gsap.delayedCall(0.6, () => toggleWebTheme(nextTheme));
     }
-  }, [buttonRef, dark])
-
-  // Animate circle size
-  useEffect(() => {
-    let animationFrame: number
-    const targetSize = dark ? window.innerWidth * 2 : 0
-
-    const animate = () => {
-      setCircleSize(prev => {
-        const diff = targetSize - prev
-        const next = prev + diff * 0.1
-        return Math.abs(diff) < 1 ? targetSize : next
-      })
-      animationFrame = requestAnimationFrame(animate)
-    }
-
-    animate()
-    return () => cancelAnimationFrame(animationFrame)
-  }, [dark])
-
-  // Switch logo based on circle coverage
-  useEffect(() => {
-    if (!logoRef.current) return
-    const logoRect = logoRef.current.getBoundingClientRect()
-    const dx = circlePos.x - (logoRect.left + logoRect.width / 2)
-    const dy = circlePos.y - (logoRect.top + logoRect.height / 2)
-    const distance = Math.sqrt(dx * dx + dy * dy)
-
-    setLogoSrc(distance < circleSize / 2 ? '/site-logo-dark.png' : '/site-logo-light.png')
-    setBtnLogoSrc(distance < circleSize / 2 ? '/sun.svg' : '/moon.svg')
-  }, [circleSize, circlePos])
+  });
 
   return (
-    <>
-      {/* Animated circle */}
-      <div
-        className="fixed rounded-full pointer-events-none z-[-1]"
-        style={{
-          width: circleSize,
-          height: circleSize,
-          backgroundColor: dark ? '#343434' : '#F8F8F8',
-          top: circlePos.y,
-          left: circlePos.x,
-          transform: 'translate(-50%, -50%)',
-          transition: 'background-color 0.3s',
-        }}
+    <div ref={container} className="relative">
+      {/* ✅ The Flare: We remove hardcoded top/right. Position is handled by GSAP */}
+      <div 
+        ref={flareRef}
+        className="fixed w-[100px] h-[100px] rounded-full pointer-events-none z-0 scale-0 opacity-0"
+        style={{ transformOrigin: 'center center' }}
       />
 
-      {/* Header content */}
-      <div className="w-full flex items-center justify-center absolute top-0 left-0 z-10 bg-transparent">
+      <div className="w-full flex items-center justify-center absolute top-0 left-0 z-10">
         <div className="w-full max-w-[1366px] flex items-center justify-between px-5 py-4">
-          {/* Logo */}
-          <img
-            ref={logoRef}
-            src={logoSrc}
-            alt="Site Logo"
-            className="w-auto h-auto max-w-[162px] transition-opacity duration-300"
-          />
+          
+          <img src="/site-logo-light.png" alt="Logo" className="max-w-[162px]" />
 
-          {/* Nav */}
-          <ul className="flex gap-12 text-[18px]" style={{ color: textColor }}>
+          <ul className="flex gap-12 text-[18px]">
             <li><a href="#">Home</a></li>
             <li><a href="#">About</a></li>
             <li><a href="#">Projects</a></li>
             <li><a href="#">Contact</a></li>
           </ul>
 
-          {/* Dark mode toggle button */}
-          <button
-  ref={buttonRef}
-  onClick={toggleDark}
-  style={{ 
-    backgroundColor: dark ? '#f8f8f8' :  '#343434', // force visible change
-    transition: 'background-color 0.3s',
-  }}
-  className="px-2.5 py-2.5 rounded-full z-20 relative"
->
-  <img
-    src={`${btnLogoSrc}`}
-    alt="Toggle Dark Mode"
-    className="w-full h-full max-w-7.5 max-h-7.5"
-  />
-</button>
+          <button 
+            ref={buttonRef} // ✅ Attach the ref here
+            onClick={handleThemeToggle}
+            className={`px-2.5 py-2.5 rounded-full z-20 relative transition-colors duration-500 ${
+                webTheme === 'light' ? 'bg-[#343434]' : 'bg-[#f8f8f8]'
+            }`}
+          >
+            <img
+              src={`/${webTheme === 'light' ? 'moon' : 'sun'}.svg`}
+              alt="Toggle"
+              className="w-7.5 h-7.5"
+            />
+          </button>
         </div>
       </div>
-    </>
-  )
-}
+    </div>
+  );
+};
 
-export default Header
+export default Header;

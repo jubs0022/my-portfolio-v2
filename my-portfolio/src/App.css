@@ -2,7 +2,7 @@
 @import "tailwindcss";
 @layer base{
   body {
-    @apply font-[poppins] text-black text-xl;
+    @apply font-[poppins] text-xl;
   }
 
   h1{

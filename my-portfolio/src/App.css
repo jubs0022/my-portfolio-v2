@@ -28,4 +28,8 @@
   h6{
     @apply font-[inter] text-[20px] font-bold;
   }
+
+  button{
+    @apply font-[poppins] bg-[#043980] text-white text-lg font-semibold px-7.5 py-3.75 rounded-lg
+  }
 }

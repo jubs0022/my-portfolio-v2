@@ -1,8 +1,10 @@
 import './hero.css'
 import { useRef, useEffect } from 'react'
 import gsap from 'gsap'
+import { useThemeStore } from '../../themeStore';
 
 export default function Hero() {
+  const webTheme = useThemeStore((state) => state.webTheme);
   const nameRef = useRef<HTMLHeadingElement>(null)
 
   useEffect(() => {
@@ -21,7 +23,7 @@ export default function Hero() {
     <div className="section flex flex-row justify-center">
       <div className="row w-full max-w-341.5 pt-57.5 py-30 flex flex-row px-[4%] gap-15 items-center">
         <div className="content w-full max-w-127.25 flex flex-col">
-          <img src="grad-pic.jpg" className="w-full rounded-4xl" />
+          <img src="grad-pic.jpg" className={`w-full rounded-4xl ${ webTheme === 'light' ? 'shadow-[0_0_12px_rgba(0,0,0,0.25)]' : 'shadow-[0_0_12px_rgba(255,255,255,0.25)]'}`} />
         </div>
         <div className="content w-full flex flex-col gap-3.75">
           <div className="flex flex-col gap-2">
@@ -29,8 +31,8 @@ export default function Hero() {
             <h1
               ref={nameRef} // <-- GSAP target
               className="
-                bg-gradient-to-r from-[#6366F1] via-[#22D3EE] to-[#2FABF2]
-                bg-[length:200%_auto]
+                bg-linear-to-r from-[#6366F1] via-[#22D3EE] to-[#2FABF2]
+                bg-size-[200%_auto]
                 text-transparent bg-clip-text
                 animate-gradient
               "
@@ -43,7 +45,7 @@ export default function Hero() {
           </p>
           <div className="flex gap-3.75">
             <button>Download CV</button>
-            <button className="bg-transparent text-[#343434] border border-[#343434]">Learn more about me</button>
+            <button className={`bg-transparent  border ${webTheme === 'light' ? 'border-[#343434] text-[#343434] transition-normal duration-2000' :'border-[#f8f8f8] text-[#f8f8f8] transition-normal duration-2000'}`}>Learn more about me</button>
           </div>
         </div>
       </div>

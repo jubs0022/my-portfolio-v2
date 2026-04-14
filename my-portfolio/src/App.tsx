@@ -3,6 +3,9 @@ import { useThemeStore } from './themeStore';
 import Default_Footer from './structure/footer/default-footer';
 import './App.css';
 import Hero from './structure/hero-section/hero';
+import Homeproj from './structure/projects-section/home/homeproj';
+import Homeblog from './structure/blogs/home/home_blog';
+import TestimonialsHome from './structure/testimonials/home/testimonials_home';
 
 function App() {
   const webTheme = useThemeStore((state) => state.webTheme);
@@ -13,6 +16,9 @@ function App() {
     }`}>
       <Header />
       <Hero />
+      <Homeproj />
+      <Homeblog />
+      <TestimonialsHome />
       <Default_Footer />
     </div>
   )

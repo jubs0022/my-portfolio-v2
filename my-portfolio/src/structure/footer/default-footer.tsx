@@ -91,13 +91,13 @@ export default function Default_Footer() {
             {/* EMAIL */}
             <img
               src="/email.svg"
-              className={`row-start-1 col-start-4 h-auto transition-opacity duration-[2000ms] w-8.25 ${
+              className={`row-start-1 col-start-4 h-auto transition-opacity duration-2000 w-8.25 ${
                 webTheme === "light" ? "opacity-100" : "opacity-0"
               }`}
             />
             <img
               src="/email.svg"
-              className={`row-start-1 col-start-4 h-auto transition-opacity duration-[2000ms] w-8.25 invert brightness-[0] ${
+              className={`row-start-1 col-start-4 h-auto transition-opacity duration-2000 w-8.25 invert brightness-[0] ${
                 webTheme === "dark" ? "opacity-100" : "opacity-0"
               }`}
             />

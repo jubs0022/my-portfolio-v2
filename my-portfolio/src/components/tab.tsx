@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import  { useState } from 'react';
 
 const Tabs = () => {
   // We use state to keep track of which tab is currently selected. 

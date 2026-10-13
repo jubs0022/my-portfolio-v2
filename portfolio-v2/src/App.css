@@ -1,0 +1,88 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Space+Grotesk:wght@300..700&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
+:root{
+  --primary:#f5f0f1;
+  --secondary:#04070c;
+  --text-color: #789eb6;
+  --accent: #008DFF;
+  --dark-slate:#1D2832;
+  --ebony:#04070c;
+  --cyan:#46b8ea;
+  --teal:#27c6b2;
+  --midnight-gray:#353c4a;
+  --near-black-slate:#13151c;
+  --muted-steel-blue:#13233066;
+  --band:#060a11;
+}
+
+
+p, a{
+  font-family: "DM Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-size:1rem;
+  font-style: normal;
+  
+  /* Optional: using your global variables */
+  
+  color: var(--text-color);
+  text-decoration: none;
+  line-height: 1.5em;
+}
+
+h1{
+  font-family: "Space Grotesk", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 700;
+  font-size:4.5rem;
+  line-height: 1.5em;
+  font-style: normal;
+  color: var(--primary);
+}
+
+h2{
+  font-family: "Space Grotesk", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 700;
+  font-size:3rem;
+  line-height: 1.3em;
+  font-style: normal;
+  color: var(--primary);
+}
+
+body{
+  background-color: var(--secondary);
+  padding: 0;
+}
+
+/* Removes default margins and padding from all elements */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+button{
+  background-color: transparent;
+  border: none;
+  color: white;
+}
+
+.primary-button{
+  background-color:  var(--accent);
+  display: flex;
+  align-items: center;
+  padding:10px 20px;
+  border-radius: 4px;
+  gap: 4px;
+}
+
+
+.ghost-button {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    color: var(--cyan);
+}
+
+

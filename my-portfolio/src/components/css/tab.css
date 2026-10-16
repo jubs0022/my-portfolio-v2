@@ -1,0 +1,16 @@
+.tabs-header button{
+    border-radius: 99px;
+    padding:10px 40px;
+}
+
+.tabs-body{
+    padding: 30px;
+    border: 1px solid var(--dark-slate);
+    background-color: var(--dark-blue);
+    margin-top:40px;
+}
+
+.skills-container{
+    display: flex;
+    gap:20px;
+}

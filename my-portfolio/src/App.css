@@ -12,6 +12,7 @@
   --near-black-slate:#13151c;
   --muted-steel-blue:#13233066;
   --band:#060a11;
+  --dark-blue:#0b1118;
 }
 
 
@@ -44,6 +45,16 @@ h2{
   font-optical-sizing: auto;
   font-weight: 700;
   font-size:3rem;
+  line-height: 1.3em;
+  font-style: normal;
+  color: var(--primary);
+}
+
+h3{
+  font-family: "Space Grotesk", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 700;
+  font-size:2.3rem;
   line-height: 1.3em;
   font-style: normal;
   color: var(--primary);

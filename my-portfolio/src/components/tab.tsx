@@ -1,6 +1,5 @@
 import { useState } from "react";
 import "./css/tab.css";
-import Skills from "../pages/skills";
 import HTML5 from "../assets/html5.svg?react"
 
 const Tabs = () => {
@@ -31,7 +30,6 @@ const Tabs = () => {
       <div className="tabs-header">
         {tabData.map((tab, index) => (
           <button
-            className=""
             key={tab.id}
             // If the activeTab matches this button's index, add an 'active' class for styling
             className={`tab-button ${activeTab === index ? "active" : ""} primary-button`}

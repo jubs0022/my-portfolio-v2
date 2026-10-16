@@ -13,8 +13,13 @@
   --muted-steel-blue:#13233066;
   --band:#060a11;
   --dark-blue:#0b1118;
-}
 
+  .tagline{
+    font-family: "JetBrains Mono", monospace;
+    font-size: 12px !important;
+    line-height: 2em;
+  }
+}
 
 p, a{
   font-family: "DM Sans", sans-serif;

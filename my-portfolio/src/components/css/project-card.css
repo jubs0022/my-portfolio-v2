@@ -1,0 +1,23 @@
+.project-card{
+    border: 1px solid var(--dark-slate);
+    border-radius: 8px;
+}
+
+.project-upper img {
+    max-width: 100%;
+    height: auto;
+    display: block; /* Removes the tiny gap that appears below inline images */
+    border-radius: 8px 8px 0 0;
+}
+
+.project-upper button{
+    border-radius: 999px;
+    border: 1px solid var(--dark-slate);
+    padding: 10px 10px 7px 10px;
+}
+
+
+.project-upper button svg{
+    width: 20px;
+    height: 20px;
+}

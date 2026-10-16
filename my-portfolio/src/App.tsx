@@ -11,7 +11,6 @@ export default function App() {
       <main>
         {/* Child route components will render inside this Outlet */}
         <Outlet />
-        <Home />
       </main>
       <Footer />
     </>

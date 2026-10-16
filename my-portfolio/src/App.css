@@ -13,11 +13,14 @@
   --muted-steel-blue:#13233066;
   --band:#060a11;
   --dark-blue:#0b1118;
+  --light-blue:#3bcdf4;
+  --blue: #2965f1;
 
   .tagline{
     font-family: "JetBrains Mono", monospace;
     font-size: 12px !important;
     line-height: 2em;
+    letter-spacing:10%;
   }
 }
 
@@ -64,10 +67,35 @@ h3{
   font-style: normal;
   color: var(--primary);
 }
+h4{
+  font-family: "Space Grotesk", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 700;
+  font-size: 1.5rem;
+  line-height: 1.5em;
+  font-style: normal;
+  color: var(--primary);
+}
 
 body{
   background-color: var(--secondary);
   padding: 0;
+}
+
+span{
+    font-family: "JetBrains Mono", monospace;
+    font-size: 12px;
+    line-height: 1.2em;
+  }
+
+.h2-span{
+  font-family: "Space Grotesk", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 700;
+  font-size:3rem;
+  line-height: 1.3em;
+  font-style: normal;
+  color: var(--primary);
 }
 
 /* Removes default margins and padding from all elements */

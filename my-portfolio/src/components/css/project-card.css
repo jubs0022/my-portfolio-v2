@@ -10,14 +10,133 @@
     border-radius: 8px 8px 0 0;
 }
 
+.project-upper {
+    position: relative; 
+}
+
 .project-upper button{
     border-radius: 999px;
     border: 1px solid var(--dark-slate);
-    padding: 10px 10px 7px 10px;
+    padding: 8px 8px 5px 8px;
+    position: absolute;
+    top:10px;
+    right: 10px;
+}
+
+.project-upper button:hover{
+    background-color: var(--accent);
 }
 
 
 .project-upper button svg{
-    width: 20px;
-    height: 20px;
+    width: 15px;
+    height: 15px;
+}
+
+.project-info{
+    padding: 20px;
+    background-color: var(--dark-blue);
+    border-radius: 8px;
+}
+
+.project-info h4{
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+
+.skill-cards{
+    margin-top: 20px;
+    display: flex;
+    gap:10px;
+    font-size: 12px;
+}
+
+.react {
+    /* Define the base color */
+    --tech-color: #3bcdf4;
+    
+    /* Text color */
+    color: var(--tech-color);
+    
+    /* Box styling */
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-weight: normal; /* Optional: adjust based on your font */
+    
+    /* Fallback styles for older browsers */
+    background: rgba(59, 205, 244, 0.1); 
+    border: 1px solid rgba(59, 205, 244, 0.3);
+}
+
+/* Modern CSS using color-mix for precise opacity */
+@supports (color:color-mix(in lab, red, red)) {
+    .react {
+        background: color-mix(in oklch, var(--tech-color) 15%, transparent);
+        border: 1px solid color-mix(in oklch, var(--tech-color) 40%, transparent);
+    }
+}
+
+.divider{
+    height: 1px;
+    border-top: 1px solid var(--dark-slate);
+    margin: 20px 0;
+}
+
+.eyebrow-number{
+    display: flex;
+    justify-content: space-between;
+}
+
+.eyebrow-number span{
+    line-height: 2.2em;
+    color: var(--text-color);
+}
+
+.project-cta{
+    display: flex;
+    gap:20px;
+}
+
+.project-cta button{
+    width: 100%;
+}
+
+.code-button{
+    color: white;
+    background-color: var(--ebony);
+    border: 1px solid var(--dark-slate);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap:5px
+}
+
+.code-button:hover{
+    border: 1px solid var(--accent);
+}
+
+.code-button svg{
+    width: 15px;
+    height: 15px;
+}
+
+
+.visit-button{
+    color: white;
+    background-color: var(--accent);
+    border-radius: 8px;
+    padding:12px 0px;
+    border: 1px solid var(--accent);
+    display: flex;
+    justify-content: center;
+}
+
+.visit-button:hover{
+    background-color: var(--ebony);
+}
+
+.visit-button svg{
+    width: 15px;
+    height: 15px;
 }

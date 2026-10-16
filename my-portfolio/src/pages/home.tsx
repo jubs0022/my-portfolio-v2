@@ -71,7 +71,7 @@ export default function Home() {
             <div className="eyebrow eyebrow-margin">
               <p>01 / About me</p>
             </div>
-            <h2>Analytical mind. <span>Creative execution.</span></h2>
+            <h2>Analytical mind. <span className="h2-span">Creative execution.</span></h2>
           </div>
         </div>
       </div>
@@ -81,7 +81,7 @@ export default function Home() {
             <div className="eyebrow eyebrow-margin">
               <p>01 / About me</p>
             </div>
-            <h2>Different tools. <span>One builder.</span></h2>
+            <h2>Different tools. <span className="h2-span">One builder.</span></h2>
           </div>
           <TabComponent />
         </div>

@@ -45,7 +45,12 @@
     height: 1px;
 }
 
-.eyebrow p, .code-text{
+.eyebrow p{
+    font-size: 14px;
+    text-transform: uppercase;
+}
+
+.code-text{
     font-size: 14px;
 }
 

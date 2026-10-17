@@ -1,6 +1,4 @@
 import "./css/project-card.css";
-
-import Arrow from "../assets/arrow.svg?react";
 import ViewIcon from "../assets/arrow.svg?react";
 import GithubIcon from "../assets/github.svg?react";
 

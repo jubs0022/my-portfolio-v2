@@ -1,41 +1,76 @@
 import "./css/project-card.css";
-import Portfolio from "../assets/portfolio-project.jpg";
 
 import Arrow from "../assets/arrow.svg?react";
 import ViewIcon from "../assets/arrow.svg?react";
 import GithubIcon from "../assets/github.svg?react";
 
-export default function ProjectCard() {
+export interface skill {
+  name: string;
+  color: string;
+}
+
+export interface ProjectInfo {
+  id: string;
+  projectImage: string;
+  projectType: string;
+  projectTitle: string;
+  projectDescription: string;
+  projectSkills: skill[];
+  githubLink: string;
+  siteLink: string;
+}
+
+interface ProjectCardsProps {
+  project: ProjectInfo;
+}
+
+export default function ProjectCard({ project }: ProjectCardsProps) {
   return (
     <div className="project-card">
       <div className="project-upper">
-        <img src={Portfolio} />
-        <button>
-          <Arrow />
-        </button>
+        <img src={project.projectImage} />
       </div>
       <div className="project-info">
-        <div className="eyebrow-number">
+        <div className="project-description">
+          <div className="eyebrow-number">
           <div className="eyebrow">
-            <p>Web Development</p>
+            <p>{project.projectType}</p>
           </div>
-          <span>01</span>
+          <span>02</span>
         </div>
-        <h4>Personal Portfolio</h4>
-        <p>
-          A home for my work, skills, and story. Built with React and Vite,
-          styled with Tailwind CSS, and deployed with Docker and Nginx.
-        </p>
-        <div className="skill-cards">
-          <span className="react">React</span>
-          <span className="react">CSS</span>
-          <span className="react">HTML</span>
-          <span className="react">Typescript</span>
+        <h4>{project.projectTitle}</h4>
+        <p>{project.projectDescription}</p>
         </div>
-        <div className="divider"></div>
-        <div className="project-cta">
-            <button className="code-button"><GithubIcon />View Code</button>
-            <button className="visit-button">Visit Site<ViewIcon /></button>
+        <div className="cta-skill-badge">
+          <div className="skill-cards">
+            {project.projectSkills.map((skill) => (
+              <span
+                className="skill-badge-color"
+                style={{ "--tech-color": skill.color } as React.CSSProperties}
+              >
+                {skill.name}
+              </span>
+            ))}
+          </div>
+          <div className="divider"></div>
+          <div className="project-cta">
+            {project.githubLink && (
+              <button
+                className="code-button"
+                onClick={() => window.open(project.githubLink, "_blank")}
+              >
+                <GithubIcon />
+                View Code
+              </button>
+            )}
+            <button
+              className="visit-button"
+              onClick={() => window.open(project.siteLink, "_blank")}
+            >
+              Visit Site
+              <ViewIcon />
+            </button>
+          </div>
         </div>
       </div>
     </div>

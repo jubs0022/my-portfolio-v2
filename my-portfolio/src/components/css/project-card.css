@@ -14,24 +14,7 @@
     position: relative; 
 }
 
-.project-upper button{
-    border-radius: 999px;
-    border: 1px solid var(--dark-slate);
-    padding: 8px 8px 5px 8px;
-    position: absolute;
-    top:10px;
-    right: 10px;
-}
 
-.project-upper button:hover{
-    background-color: var(--accent);
-}
-
-
-.project-upper button svg{
-    width: 15px;
-    height: 15px;
-}
 
 .project-info{
     padding: 20px;
@@ -44,33 +27,31 @@
     margin-bottom: 10px;
 }
 
-.skill-cards{
+.skill-cards {
     margin-top: 20px;
     display: flex;
-    gap:10px;
+    flex-wrap: wrap; /* Allows badges to wrap nicely to the next line */
+    gap: 10px;
     font-size: 12px;
 }
 
-.react {
-    /* Define the base color */
-    --tech-color: #3bcdf4;
-    
+.skill-badge-color {
     /* Text color */
     color: var(--tech-color);
     
     /* Box styling */
     padding: 6px 12px;
     border-radius: 8px;
-    font-weight: normal; /* Optional: adjust based on your font */
+    font-weight: normal; 
     
     /* Fallback styles for older browsers */
     background: rgba(59, 205, 244, 0.1); 
     border: 1px solid rgba(59, 205, 244, 0.3);
 }
 
-/* Modern CSS using color-mix for precise opacity */
-@supports (color:color-mix(in lab, red, red)) {
-    .react {
+/* Modern CSS: Automatically tints the background and border based on `--tech-color` */
+@supports (color: color-mix(in lab, red, red)) {
+    .skill-badge-color {
         background: color-mix(in oklch, var(--tech-color) 15%, transparent);
         border: 1px solid color-mix(in oklch, var(--tech-color) 40%, transparent);
     }
@@ -134,9 +115,27 @@
 
 .visit-button:hover{
     background-color: var(--ebony);
+    cursor: pointer;
 }
 
 .visit-button svg{
     width: 15px;
     height: 15px;
 }
+
+
+/* 1. Make the outer card a flex column that fills 100% height */
+.project-card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+/* 2. Make the info section expand to fill the rest of the space */
+.project-info {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    justify-content: space-between;
+}
+

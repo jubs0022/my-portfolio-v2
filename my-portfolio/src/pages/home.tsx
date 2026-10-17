@@ -1,12 +1,12 @@
 import "./css/home.css";
 import DownloadIcon from "../assets/download.svg?react";
-import ViewIcon from "../assets/arrow.svg?react"
 import { Link } from "react-router-dom";
-import GithubIcon from "../assets/github.svg?react"
-import Linkedin from "../assets/linkedin.svg?react"
-import Facebook from "../assets/facebook.svg?react"
-import Email from "../assets/email.svg?react"
-import GraduationImage from "../assets/grad-image.jpeg"
+import ViewIcon from "../assets/arrow.svg?react";
+import GithubIcon from "../assets/github.svg?react";
+import Linkedin from "../assets/linkedin.svg?react";
+import Facebook from "../assets/facebook.svg?react";
+import Email from "../assets/email.svg?react";
+import GraduationImage from "../assets/grad-image.jpeg";
 import TabComponent from "../components/tab";
 
 export default function Home() {

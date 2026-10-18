@@ -15,7 +15,7 @@ export default function Footer(){
                     <img src={MyLogo} alt="Site Logo" />
                 </Link>
             </div>
-            <div>
+            <div className="copyright">
                 <p>© 2026 Jubert C. Nantes</p>
             </div>
             <div className="social-links">

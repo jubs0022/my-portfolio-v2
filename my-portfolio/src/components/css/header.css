@@ -1,64 +1,148 @@
-.nav-section{
-    padding:20px 0px;
+.nav-section {
+    padding: 20px 0px;
     background-color: var(--ebony);
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
     width: 100%;
-    border-bottom:1px solid var(--dark-slate);
+    border-bottom: 1px solid var(--dark-slate);
+    box-sizing: border-box;
+    position: relative;
+    overflow: hidden;
 }
 
-.nav-row{
-    padding:0 4%;
+.nav-row {
+    padding: 0 4%;
     width: 100%;
     max-width: 1320px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    box-sizing: border-box;
 }
 
-.nav-items{
+.nav-items {
     display: flex;
-    gap:28px;
+    gap: 28px;
 }
 
-.site-logo img{
+.site-logo img {
     width: 100%;
     max-width: 150px;
 }
 
 .nav-items a {
-  position: relative;
-  text-decoration: none;
+    position: relative;
+    text-decoration: none;
+    color: white;
 }
 
-/* 1. The underline setup */
+/* Underline animation styles mo */
 .nav-items a::after {
-  content: '';
-  position: absolute;
-  width: 100%;
-  height: 1px;
-  bottom: -4px;
-  left: 0;
-  background-color: var(--accent);
-  
-  /* Start collapsed */
-  transform: scaleX(0);
-  
-  /* Nakapako sa left: lalaki mula kaliwa, liliit pabalik sa kaliwa */
-  transform-origin: left; 
-  
-  transition: transform 0.3s ease-in-out;
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 1px;
+    bottom: -4px;
+    left: 0;
+    background-color: var(--accent);
+    transform: scaleX(0);
+    transform-origin: left; 
+    transition: transform 0.3s ease-in-out;
 }
 
 .nav-items a:hover,
 .nav-items a.active {
-  color: var(--accent);
+    color: var(--accent);
 }
 
-/* 3. The underline animation on hover AND active state */
 .nav-items a:hover::after,
 .nav-items a.active::after {
-  transform: scaleX(1);
+    transform: scaleX(1);
+}
+
+/* Default state ng mobile button (Nakatago sa desktop) */
+.mobile-menu-btn {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    z-index: 1002;
+}
+
+.mobile-menu-btn img {
+    width: 30px;
+    height: auto;
+    display: block;
+    filter: brightness(0) invert(1); /* Ginagawang puti ang burger icon */
+}
+
+/* Mobile Dropdown / Side Drawer (Naka-hide sa kanan) */
+.mobile-dropdown-menu {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 0;
+    right: -50%; /* Naka-tago sa labas ng screen sa kanan */
+    width: 50%; /* Sakop ang 50% ng screen width */
+    height: 100vh;
+    background-color: var(--ebony);
+    border-left: 1px solid var(--dark-slate);
+    padding: 80px 10% 30px 10%;
+    gap: 24px;
+    box-sizing: border-box;
+    z-index: 1000;
+    box-shadow: -5px 0 20px rgba(0, 0, 0, 0.7);
+    transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1); /* Smooth slide effect */
+}
+
+/* Kapag binuksan: Aakyat papasok sa 0 position (Right to Left) */
+.mobile-dropdown-menu.open {
+    right: 0;
+}
+
+.mobile-dropdown-menu a {
+    text-decoration: none;
+    color: white;
+    font-size: 18px;
+}
+
+.mobile-dropdown-menu a:hover,
+.mobile-dropdown-menu a.active {
+    color: var(--accent);
+}
+
+/* Darkened Backdrop Overlay */
+.mobile-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.6);
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+    z-index: 999;
+}
+
+.mobile-backdrop.active {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* ==========================================
+   MEDIA QUERY: Kapag under 1024px na ang screen
+   ========================================== */
+@media (max-width: 1024px) {
+    .nav-items {
+        display: none !important;
+    }
+
+    .mobile-menu-btn {
+        display: block !important;
+        margin-left: auto;
+    }
 }

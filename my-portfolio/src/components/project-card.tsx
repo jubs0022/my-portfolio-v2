@@ -23,6 +23,7 @@ interface ProjectCardsProps {
 }
 
 export default function ProjectCard({ project }: ProjectCardsProps) {
+  const formattedId = project.id.padStart(2, '0');
   return (
     <div className="project-card">
       <div className="project-upper">
@@ -34,7 +35,7 @@ export default function ProjectCard({ project }: ProjectCardsProps) {
           <div className="eyebrow">
             <p>{project.projectType}</p>
           </div>
-          <span>02</span>
+          <span>{formattedId}</span>
         </div>
         <h4>{project.projectTitle}</h4>
         <p>{project.projectDescription}</p>

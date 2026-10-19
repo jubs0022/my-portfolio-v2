@@ -1,7 +1,7 @@
-import { useState } from "react";
+//import { useState } from "react";
 import "./css/tab.css";
 import HTML5 from "../assets/html5.svg?react"
-import Skills from "../pages/skills";
+//import Skills from "../pages/skills";
 
 export default function TabsItem(){
   // We use state to keep track of which tab is currently selected.

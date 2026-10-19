@@ -7,7 +7,6 @@
     align-items: center;
     width: 100%;
     border-bottom:1px solid var(--dark-slate);
-
     background-image: linear-gradient(var(--muted-steel-blue) 1px, transparent 1px), linear-gradient(90deg, var(--muted-steel-blue) 1px, transparent 1px);
     background-size: 36px 36px; 
 }
@@ -216,4 +215,98 @@
 .skill-heading-container span{
     color: var(--cyan);
 }
+
+/*Project Section*/
+.projects-section{
+    padding:100px 0px;
+    background-color: var(--ebony);
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    border-bottom:1px solid var(--dark-slate);
+    background-image: linear-gradient(var(--muted-steel-blue) 1px, transparent 1px), linear-gradient(90deg, var(--muted-steel-blue) 1px, transparent 1px);
+    background-size: 36px 36px; 
+}
+
+.projects-row{
+    padding:0 4%;
+    width: 100%;
+    max-width: 1320px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    gap:80px;
+}
+
+.projects-heading-container{
+    width: 100%;
+}
+
+.project-wrapper{
+    display: flex;
+}
+
+.project-shot img{
+    width:100%;
+    max-width:100%;
+    height:300px;
+}
+
+.project-shot, .project-column{
+    width:100%;
+    max-width:50%;
+}
+
+.project-wrapper{
+    display:flex;
+    gap:50px;
+}
+
+.project-shot{
+    padding:30px;
+    background: linear-gradient(90deg, #0c141f, #04070c);
+    border:1px solid var(--dark-slate);
+    border-radius:8px;
+}
+
+.project-column{
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.project-column .eyebrow p{
+    color: var(--accent);
+    margin-bottom: 6px;
+}
+
+.project-column h3, .project-column p, .skill-badge-wrapper {
+    display:flex;
+    margin-bottom: 20px;
+}
+.skill-badge-wrapper p{
+    margin:0px;
+    font-family: "DM Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-size: 12px;
+    font-style: normal;
+    color: var(--cyan);
+    text-decoration: none;
+    line-height: 1.5em;
+}
+
+.skill-badge-wrapper{
+    gap:10px;
+}
+
+.skill-badge{
+    background-color:oklch(19% .026 255);
+    padding:6px 15px;
+    border-radius:4px;
+}
+
 

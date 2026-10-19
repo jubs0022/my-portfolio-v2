@@ -8,6 +8,7 @@ import Facebook from "../assets/facebook.svg?react";
 import Email from "../assets/email.svg?react";
 import GraduationImage from "../assets/grad-image.jpeg";
 import TabComponent from "../components/tab";
+import LongView from "../assets/lvc.png";
 
 export default function Home() {
   return (
@@ -26,36 +27,59 @@ export default function Home() {
             </p>
             <p>
               Turning ideas into thoughtful digital experiences. A Bachelor of
-              Science in Information Technology graduate focused on WordPress, web
-              development, and learning full-stack technologies.
+              Science in Information Technology graduate focused on WordPress,
+              web development, and learning full-stack technologies.
             </p>
             <div className="cv-cta">
-              <button className="primary-button"><DownloadIcon className="download-icon"/>Download CV</button>
-              <button className="ghost-button">View CV <ViewIcon className="view-icon"/></button>
+              <button className="primary-button">
+                <DownloadIcon className="download-icon" />
+                Download CV
+              </button>
+              <button className="ghost-button">
+                View CV <ViewIcon className="view-icon" />
+              </button>
             </div>
             <div className="social-links">
-                  <Link to="https://github.com/jubs0022" target="_blank" rel="noopener noreferrer">
-                      <GithubIcon className="icons"/>
-                  </Link>
-                  <Link to="https://www.linkedin.com/in/jubert-nantes-302206347/" target="_blank" rel="noopener noreferrer">
-                      <Linkedin className="icons" />
-                  </Link>
-                  <Link to="https://www.facebook.com/jubert.nantes.2024/" target="_blank" rel="noopener noreferrer">
-                      <Facebook className="icons" />
-                  </Link>
-                  <Link to="mailto:jubert.nantes0418@gmail.com" target="_blank" rel="noopener noreferrer">
-                      <Email className="icons" />
-                  </Link>
-              </div>
+              <Link
+                to="https://github.com/jubs0022"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <GithubIcon className="icons" />
+              </Link>
+              <Link
+                to="https://www.linkedin.com/in/jubert-nantes-302206347/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Linkedin className="icons" />
+              </Link>
+              <Link
+                to="https://www.facebook.com/jubert.nantes.2024/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Facebook className="icons" />
+              </Link>
+              <Link
+                to="mailto:jubert.nantes0418@gmail.com"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Email className="icons" />
+              </Link>
+            </div>
           </div>
           <div className="hero-container">
-              <div className="hero-image">
-                <img src={GraduationImage} />
-                <div className="grad-text">
-                  <p className="developer-text">DEVELOPER IN THE MAKING</p>
-                  <p className="learning-text">Always learning. Always building.</p>
-                </div>
+            <div className="hero-image">
+              <img src={GraduationImage} />
+              <div className="grad-text">
+                <p className="developer-text">DEVELOPER IN THE MAKING</p>
+                <p className="learning-text">
+                  Always learning. Always building.
+                </p>
               </div>
+            </div>
           </div>
         </div>
       </div>
@@ -63,15 +87,24 @@ export default function Home() {
         <div className="about-row">
           <div className="description-container">
             <p>
-              A BSIT graduate with experience in Software Development, Web Development, and API Development. I’ve completed multiple academic projects focused on creating efficient and user-friendly applications, gaining practical skills in designing modern solutions that address real-world needs.
+              A BSIT graduate with experience in Software Development, Web
+              Development, and API Development. I’ve completed multiple academic
+              projects focused on creating efficient and user-friendly
+              applications, gaining practical skills in designing modern
+              solutions that address real-world needs.
             </p>
-            <button className="ghost-button">View More <ViewIcon className="view-icon"/></button>
+            <button className="ghost-button">
+              View More <ViewIcon className="view-icon" />
+            </button>
           </div>
           <div className="heading-container">
             <div className="eyebrow eyebrow-margin">
               <p>01 / About me</p>
             </div>
-            <h2>Analytical mind. <span className="h2-span">Creative execution.</span></h2>
+            <h2>
+              Analytical mind.{" "}
+              <span className="h2-span">Creative execution.</span>
+            </h2>
           </div>
         </div>
       </div>
@@ -81,9 +114,46 @@ export default function Home() {
             <div className="eyebrow eyebrow-margin">
               <p>01 / About me</p>
             </div>
-            <h2>Different tools. <span className="h2-span">One builder.</span></h2>
+            <h2>
+              Different tools. <span className="h2-span">One builder.</span>
+            </h2>
           </div>
           <TabComponent />
+        </div>
+      </div>
+      <div className="projects-section">
+        <div className="projects-row">
+          <div className="projects-heading-container">
+            <div className="eyebrow eyebrow-margin">
+              <p>Selected work</p>
+            </div>
+            <h2>Built with purpose.
+            </h2>
+          </div>
+          <div className="project-wrapper">
+            <div className="project-shot">
+                <img src={LongView} />
+            </div>
+            <div className="project-column">
+              <div className="eyebrow">
+                <p>WEB DEVELOPMENT</p>
+              </div>
+              <h3 className="">Personal Portfolio</h3>
+              <p>
+                Turning ideas into thoughtful digital experiences. A Bachelor of Science in Information Technology graduate focused on WordPress, web development, and learning full-stack technologies.
+              </p>
+              <div className="skill-badge-wrapper">
+                <p className="skill-badge">React</p>
+                <p className="skill-badge">HTML</p>
+                <p className="skill-badge">CSS</p>
+                <p className="skill-badge">Javascript</p>
+              </div>
+              <div className="cta-wrapper">
+                <button className="live-button">View Live</button>
+                <button className="github-button">View Code</button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

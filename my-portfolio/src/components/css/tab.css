@@ -10,10 +10,29 @@
     margin-top:30px;
 }
 
-.tabs-button{
-    padding:15px 30px;
-    background-color:var(--accent);
-    border-radius:999px;
+.tabs-header {
+  display: flex;
+  gap: 15px;
+  margin-top: 40px;
+}
+
+.tabs-button {
+  padding: 15px 30px;
+  border: 1px solid var(--dark-slate);
+  background-color: #070e1a;
+  border-radius: 999px;
+  width: 100%;
+  cursor: pointer;
+  transition: background-color 0.2s, border-color 0.2s;
+}
+
+.tabs-button:hover {
+  border: 1px solid var(--accent);
+}
+
+.tabs-button.active {
+  background-color: var(--accent);
+  border: 1px solid var(--accent);
 }
 
 .skill-button svg{

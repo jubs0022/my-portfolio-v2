@@ -9,6 +9,8 @@ import Email from "../assets/email.svg?react";
 import GraduationImage from "../assets/grad-image.jpeg";
 import TabComponent from "../components/tab";
 import LongView from "../assets/lvc.png";
+import ExternalLink from "../assets/external-link.svg?react"
+import { tabDetails } from "./data/tab";
 
 export default function Home() {
   return (
@@ -35,7 +37,7 @@ export default function Home() {
                 <DownloadIcon className="download-icon" />
                 Download CV
               </button>
-              <button className="ghost-button">
+              <button className="ghost-button ghost-background">
                 View CV <ViewIcon className="view-icon" />
               </button>
             </div>
@@ -99,7 +101,7 @@ export default function Home() {
           </div>
           <div className="heading-container">
             <div className="eyebrow eyebrow-margin">
-              <p>01 / About me</p>
+              <p>About me</p>
             </div>
             <h2>
               Analytical mind.{" "}
@@ -112,13 +114,13 @@ export default function Home() {
         <div className="skill-row">
           <div className="skill-heading-container">
             <div className="eyebrow eyebrow-margin">
-              <p>01 / About me</p>
+              <p>What I do</p>
             </div>
             <h2>
               Different tools. <span className="h2-span">One builder.</span>
             </h2>
           </div>
-          <TabComponent />
+          <TabComponent tabBody={tabDetails}/>
         </div>
       </div>
       <div className="projects-section">
@@ -149,10 +151,30 @@ export default function Home() {
                 <p className="skill-badge">Javascript</p>
               </div>
               <div className="cta-wrapper">
-                <button className="live-button">View Live</button>
-                <button className="github-button">View Code</button>
+                <button className="primary-button">View Live<ExternalLink /></button>
+                <button className="ghost-button ghost-background"><GithubIcon />View Code</button>
               </div>
             </div>
+          </div>
+        </div>
+      </div>
+      <div className="contact-section">
+        <div className="contact-row">
+          <div className="contact-wrapper">
+            <div className="contact-heading-container">
+            <div className="eyebrow">
+              <p>Get in touch</p>
+            </div>
+            <h2>
+              Analytical mind.<br />
+              <span className="h2-span contact-span">Creative execution.</span>
+            </h2>
+            <p>Open to full-time roles, freelance projects, and everything in between.</p>
+          </div>
+              <div className="cta-wrapper contact-cta">
+                <button className="primary-button primary-padding primary-font">View Live</button>
+                <button className="ghost-button ghost-background ghost-padding ghost-font">View Code</button>
+              </div>
           </div>
         </div>
       </div>

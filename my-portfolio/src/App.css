@@ -137,7 +137,14 @@ button{
     display: flex;
     align-items: center;
     gap: 2px;
-    color: var(--cyan);
+    color: var(--cyan);    
+}
+
+.ghost-background{
+  
+    background: #0c141f;
+    padding: 10px 20px;
+    border-radius: 4px;
 }
 
 /* 1. Iwasan ang horizontal scroll sa buong pahina */

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import "./css/header.css";
 import MyLogo from "../assets/site-logo.png";
 import MenuIcon from "../assets/menu.png";
@@ -21,7 +21,7 @@ export default function Header() {
                 <div className="nav-items">
                     <NavLink to="/">Home</NavLink>
                     <NavLink to="/about">About</NavLink>
-                    <NavLink to="/skills">Skills</NavLink>
+                    <Link to="/#skill-section">Skills</Link>
                     <NavLink to="/project">Project</NavLink>
                     <NavLink to="/contact">Contact</NavLink>
                 </div>
@@ -37,7 +37,7 @@ export default function Header() {
             <div className={`mobile-dropdown-menu ${isOpen ? "open" : ""}`}>
                 <NavLink to="/" onClick={closeMenu}>Home</NavLink>
                 <NavLink to="/about" onClick={closeMenu}>About</NavLink>
-                <NavLink to="/skills" onClick={closeMenu}>Skills</NavLink>
+                <Link to="/#skill-section" onClick={closeMenu}>Skills</Link>
                 <NavLink to="/project" onClick={closeMenu}>Project</NavLink>
                 <NavLink to="/contact" onClick={closeMenu}>Contact</NavLink>
             </div>

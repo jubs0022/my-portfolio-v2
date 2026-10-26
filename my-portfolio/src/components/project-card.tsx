@@ -18,7 +18,7 @@ export interface ProjectInfo {
   siteLink: string;
 }
 
-interface ProjectCardsProps {
+export interface ProjectCardsProps {
   project: ProjectInfo;
 }
 

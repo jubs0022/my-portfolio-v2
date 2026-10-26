@@ -8,11 +8,23 @@ import Facebook from "../assets/facebook.svg?react";
 import Email from "../assets/email.svg?react";
 import GraduationImage from "../assets/grad-image.jpeg";
 import TabComponent from "../components/tab";
-import LongView from "../assets/lvc.png";
-import ExternalLink from "../assets/external-link.svg?react"
 import { tabDetails } from "./data/tab";
+import ProjectHomepage from "../components/project-homepage";
+import { projectsList } from "./data/project";
+import { useState } from "react";
+import Pagination from "../components/pagination"; // adjust path to where you put it
+import CV from "../assets/jubert-cv.pdf"
+import { useNavigate } from "react-router-dom";
+
+// --- add inside your Home component, before the return ---
+const MAX_PROJECTS = 5;
+const PROJECTS_PER_PAGE = 1;
 
 export default function Home() {
+  const navigate = useNavigate();
+  const [page, setPage] = useState(1);
+  const limitedProjects = projectsList.slice(0, MAX_PROJECTS);
+  const totalPages = Math.ceil(limitedProjects.length / PROJECTS_PER_PAGE);
   return (
     <div className="main-page">
       <div className="hero-section">
@@ -110,7 +122,7 @@ export default function Home() {
           </div>
         </div>
       </div>
-      <div className="skill-section">
+      <div className="skill-section" id="skill-section">
         <div className="skill-row">
           <div className="skill-heading-container">
             <div className="eyebrow eyebrow-margin">
@@ -120,7 +132,7 @@ export default function Home() {
               Different tools. <span className="h2-span">One builder.</span>
             </h2>
           </div>
-          <TabComponent tabBody={tabDetails}/>
+          <TabComponent tabBody={tabDetails} />
         </div>
       </div>
       <div className="projects-section">
@@ -129,52 +141,63 @@ export default function Home() {
             <div className="eyebrow eyebrow-margin">
               <p>Selected work</p>
             </div>
-            <h2>Built with purpose.
-            </h2>
+            <h2>Built with purpose.</h2>
           </div>
-          <div className="project-wrapper">
-            <div className="project-shot">
-                <img src={LongView} />
-            </div>
-            <div className="project-column">
-              <div className="eyebrow">
-                <p>WEB DEVELOPMENT</p>
-              </div>
-              <h3 className="">Personal Portfolio</h3>
-              <p>
-                Turning ideas into thoughtful digital experiences. A Bachelor of Science in Information Technology graduate focused on WordPress, web development, and learning full-stack technologies.
-              </p>
-              <div className="skill-badge-wrapper">
-                <p className="skill-badge">React</p>
-                <p className="skill-badge">HTML</p>
-                <p className="skill-badge">CSS</p>
-                <p className="skill-badge">Javascript</p>
-              </div>
-              <div className="cta-wrapper">
-                <button className="primary-button">View Live<ExternalLink /></button>
-                <button className="ghost-button ghost-background"><GithubIcon />View Code</button>
-              </div>
+
+          <div className="project-slider">
+            <div
+              className="project-track"
+              style={{ transform: `translateX(-${(page - 1) * 100}%)` }}
+            >
+              {limitedProjects.map((project, i) => (
+                <div
+                  key={project.id}
+                  className={`project-slide ${i + 1 === page ? "is-active" : ""}`}
+                  aria-hidden={i + 1 !== page}
+                >
+                  <ProjectHomepage project={project} />
+                </div>
+              ))}
             </div>
           </div>
+
+          <Pagination
+            currentPage={page}
+            totalPages={totalPages}
+            onPageChange={setPage}
+          />
         </div>
       </div>
       <div className="contact-section">
         <div className="contact-row">
           <div className="contact-wrapper">
             <div className="contact-heading-container">
-            <div className="eyebrow">
-              <p>Get in touch</p>
-            </div>
-            <h2>
-              Analytical mind.<br />
-              <span className="h2-span contact-span">Creative execution.</span>
-            </h2>
-            <p>Open to full-time roles, freelance projects, and everything in between.</p>
-          </div>
-              <div className="cta-wrapper contact-cta">
-                <button className="primary-button primary-padding primary-font">View Live</button>
-                <button className="ghost-button ghost-background ghost-padding ghost-font">View Code</button>
+              <div className="eyebrow">
+                <p>Get in touch</p>
               </div>
+              <h2>
+                Analytical mind.
+                <br />
+                <span className="h2-span contact-span">
+                  Creative execution.
+                </span>
+              </h2>
+              <p>
+                Open to full-time roles, freelance projects, and everything in
+                between.
+              </p>
+            </div>
+            <div className="cta-wrapper contact-cta">
+              <button
+                className="primary-button primary-padding primary-font"
+                onClick={() => navigate("/contact")}
+              >
+                Contact Me
+              </button>
+              <button className="ghost-button ghost-background ghost-padding ghost-font" onClick={() => window.open(CV, "_blank")}>
+                Preview CV
+              </button>
+            </div>
           </div>
         </div>
       </div>
